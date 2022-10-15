@@ -78,22 +78,7 @@ class _LoginState extends State<Login> {
 
       }
 
-      // StreamBuilder<QuerySnapshot>(
-      //     stream: userrole,
-      //     builder:
-      //         (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-      //           if (!snapshot.hasData) {
-      //             return Center(
-      //               child: CircularProgressIndicator(),
-      //             );
-      //           }
-      //           snapshot.data!.docs.map((DocumentSnapshot e) {
-      //             Map dis = e.data() as Map<String, dynamic>;
-      //             userdata.add(dis);
-      //           }).toList();
-      //
-      //           return Login(userdata);
-      //         });
+
 
   }
 
