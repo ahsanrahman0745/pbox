@@ -57,68 +57,23 @@ class _LoginState extends State<Login> {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   userLogin() async {
-    try {
+// new update
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       final User? user = auth.currentUser;
-print(user?.email);
+      print("user1=> ${user?.email}");
 
-      var responce;
-      await FirebaseFirestore.instance
+      var responce = await FirebaseFirestore.instance
           .collection('Users')
-          .doc(user?.email).get()
-          .then((doc) => {responce = doc.data()})
-          .catchError((error) =>
-      {print("Error on get data from User"), print(error.toString())});
+          .doc(user?.email).get();
 
-      // .where("Email", isEqualTo: emailController.text)
-          // .where("Password", isEqualTo: passwordController.text)
-       //   .snapshots();
-      //Login(userrole);
-print(responce["Email"]);
-print(await FirebaseFirestore.instance
-    .collection('Users')
-    .doc(user?.email).get());
 
-      // StreamBuilder<QuerySnapshot>(
-      //     stream: userrole,
-      //     builder:
-      //         (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-      //           if (!snapshot.hasData) {
-      //             return Center(
-      //               child: CircularProgressIndicator(),
-      //             );
-      //           }
-      //           snapshot.data!.docs.map((DocumentSnapshot e) {
-      //             Map dis = e.data() as Map<String, dynamic>;
-      //             userdata.add(dis);
-      //           }).toList();
-      //
-      //           return Login(userdata);
-      //         });
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: Colors.orangeAccent,
-            content: Text(
-              "No User Found for that Email",
-              style: TextStyle(fontSize: 18.0, color: Colors.black),
-            ),
-          ),
-        );
-      } else if (e.code == 'wrong-password') {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: Colors.orangeAccent,
-            content: Text(
-              "Wrong Password Provided by User",
-              style: TextStyle(fontSize: 18.0, color: Colors.black),
-            ),
-          ),
-        );
+      if(responce.exists){
+        Map<String, dynamic>? data = responce.data();
+        print(' email of user=> ${data?["Email"]}');
+
       }
-    }
+
   }
 
   @override

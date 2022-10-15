@@ -585,7 +585,7 @@ class SignupScreenState extends State<SignupScreen> {
 
         await FirebaseFirestore.instance
             .collection("Users")
-            .doc(UserNameEditingController.text)
+            .doc(EmailEditingController.text)
             .set(Users)
             .whenComplete(() {
           print("$UserNameEditingController.text created");
