@@ -65,20 +65,14 @@ class _LoginState extends State<Login> {
 
       var responce = await FirebaseFirestore.instance
           .collection('Users')
-          .doc(user?.email).get().catchError((error) =>
-      {print("Error on get data from User"), print(error.toString())});
+          .doc(user?.email).get();
 
-      // .where("Email", isEqualTo: emailController.text)
-          // .where("Password", isEqualTo: passwordController.text)
-       //   .snapshots();
-      //Login(userrole);
+
       if(responce.exists){
         Map<String, dynamic>? data = responce.data();
         print(' email of user=> ${data?["Email"]}');
 
       }
-
-
 
   }
 
