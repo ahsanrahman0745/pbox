@@ -57,11 +57,11 @@ class _LoginState extends State<Login> {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   userLogin() async {
-
+// new update
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       final User? user = auth.currentUser;
-      print("user=> ${user?.email}");
+      print("user1=> ${user?.email}");
 
       var responce = await FirebaseFirestore.instance
           .collection('Users')
@@ -74,7 +74,7 @@ class _LoginState extends State<Login> {
       //Login(userrole);
       if(responce.exists){
         Map<String, dynamic>? data = responce.data();
-        print(' email=> ${data?["Email"]}');
+        print(' email of user=> ${data?["Email"]}');
 
       }
 
